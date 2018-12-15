@@ -3,12 +3,17 @@ import "core-js/modules/es6.promise";
 import "core-js/modules/es6.array.iterator";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 
+// Dynamic Importing for better performance
+// App will be broken down into chunks for quicker first runs
+async function getComponents() {
+  const element = document.getElementById('root');
+  const { default: App } = await import(/* webpackChunkName: "app" */ './App');
+  ReactDOM.render(<App />, element);
 
-// import( /* webpackChunkName: 'app' */'./App')
-//   .then(({ default: App }) => {
-//     render(<App />, document.getElementById('root'))
-//   });
-ReactDOM.render(<App />, document.getElementById('root'));
+  return element;
+}
 
+getComponents().then(component => {
+  document.body.appendChild(component);
+})

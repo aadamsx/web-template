@@ -4,10 +4,13 @@ const path = require('path');
 module.exports = {
   devtool: 'cheap-module-source-map',
 
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: {
+    index: './src/index.js'
+  },
 
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
 
@@ -18,6 +21,7 @@ module.exports = {
   },
 
   devServer: {
+    open: true,
     port: 4000,
     contentBase: path.resolve(__dirname, 'src')
   },

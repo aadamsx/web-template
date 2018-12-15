@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-syntax-async-generators": "^7.2.0",
     "@babel/polyfill": "^7.0.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --compress --mode development",
+    "start": "webpack-dev-server --compress --mode development",
     "dev": "webpack --mode development --progress",
     "build": "webpack --mode production --progress"
   },
