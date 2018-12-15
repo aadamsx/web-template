@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "useBuiltIns": "entry",
+        "targets": {
+          "browsers": [
+            ">0.9%",
+            "ie >= 11",
+            "not op_mini all"
+          ]
+        }
+      }
+    ],
+    "@babel/react"
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    "@babel/syntax-dynamic-import",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}
