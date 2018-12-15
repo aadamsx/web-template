@@ -13,13 +13,16 @@
         }
       }
     ],
-    "@babel/react"
+    "@babel/react",
+    "@babel/typescript"
   ],
   // test
   "plugins": [
     "@babel/proposal-class-properties",
     "@babel/syntax-dynamic-import",
     "@babel/proposal-object-rest-spread",
-    "@babel/syntax-async-generators"
+    "@babel/syntax-async-generators",
+    "@babel/transform-typescript",
+    "@babel/syntax-typescript"
   ]
 }
