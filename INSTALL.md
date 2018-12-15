@@ -206,3 +206,43 @@ $ yarn add -D @babel/plugin-proposal-object-rest-spread
 
 # for typescript
 yarn add -D @babel/preset-typescript typescript
+
+// .babelrc
+{
+  "presets": ["@babel/react", "@babel/typescript", ["@babel/env", { "modules": false }]],
+... 
+
+// webpack.config.js
+rules: [
+  {
+    test: /\.tsx?$/,
+    loader: 'babel-loader',
+  },
+  {
+    test: /\.js$/,
+    use: ["source-map-loader"],
+    enforce: "pre"
+  },
+...
+
+# create a tsconfig.json
+$ touch. tsconfig.json
+
+// tsconfig.json
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react"
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
+
+$ yarn add @types/react @types/react-dom ??
+
+yarn remove @babel/preset-typescript awesome-typescript-loader source-map-loader typescript @types/react @types/react-dom
