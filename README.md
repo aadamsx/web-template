@@ -16,7 +16,7 @@
 
 * The hard work of configuration is done
 * Built with the latest tech, such as Babel7, Webpack4, and supports TypeScript3
-* React-typescript is ready to go
+* React-typescript integration is ready to go
 * Chunking or Dynamic import code splitting for smallter bundles and init load times set up
 * Minimal, clean, and custimizable
 * Ready to clone and run > yarn
