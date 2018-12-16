@@ -45,8 +45,6 @@ or
 
 > Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
-> Note: This repository has two branches as of this writing.  The `master` branch and the `typescript` branch only differ in that one is preped for TypeScript and the other is not.
-
 
 ## Credits
 
