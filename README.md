@@ -1,44 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+<h2 align="center">A JS Front end Template configured with Babel7, Webpack4, TypeScript3, & React</h2>
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
+</p>
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+## Key Features
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* The hard work of configuration is done
+* Built with the latest tech, such as Babel7, Webpack4, and supports TypeScript3
+* React-typescript is ready to go
+* Chunking or Dynamic import code splitting for smallter bundles and init load times set up
+* Minimal, clean, and custimizable
+* Ready to clone and run > yarn
 
-### `npm run build`
+## How To Use
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```bash
+# Clone this repository
+> git clone https://github.com/aadamsx/webpack-template
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Go into the repository
+> cd webpack-template
 
-### `npm run eject`
+# Install dependencies
+> npm install 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+or
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> yarn
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Run the app
+> npm run start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+> Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
-## Learn More
+> Note: This repository has two branches as of this writing.  The `master` branch and the `typescript` branch only differ in that one is preped for TypeScript and the other is not.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Credits
+
+This software uses the following open source packages and a few more:
+
+- [Node.js](https://nodejs.org/)
+  
+- [@babel/cli](https://babeljs.io/docs/en/babel-cli)
+  
+- [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env)
+
+- [@babel/node](https://babeljs.io/docs/en/babel-node)
+
+- [@babel/core](https://babeljs.io/docs/en/babel-core)
+
+- [nodemon](https://nodemon.io/)
+
+
+## Related
+
+[webpack-template](https://github.com/aadamsx/node-template) - React template that uses Babel7, Webpack4, TypeScript & Express
+
+
+
+## License
+
+MIT
+
+---
+
+> [aadams99@gmail.com]() &nbsp;&middot;&nbsp;
+> GitHub [@aadamsx](https://github.com/amitmerchant1990) &nbsp;&middot;&nbsp;
+> Twitter [@futureaaron](https://twitter.com/amit_merchant)

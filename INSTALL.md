@@ -1,62 +1,38 @@
-> $ create-react-app <project_name>
-> Remove node_modules
-> Remove yarn.lock
-> Remove react-scripts
-> Change versions on react and react-dom
-> $ yarn
+# Installs to start
 
-# At this point no ES6+ or JSX , Class properties, Decorators etc. syntax code will be regonized by the browser, time for babel7
-# now webpack is the bundler
-# for the transpiler, use babel 7
-> $ yarn add -D webpack webpack-cli webpack-dev-server html-webpack-plugin@next @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties
+```bash
+# Init the project
+> yarn
 
-> $ touch webpack.config.js
-> search: webpack devtool
-> search: babel7 website
+# Add webpack dependencies
+> yarn add -D webpack webpack-cli webpack-dev-server html-webpack-plugin@next 
 
-> Inside webpack.config.js
-# note, the rules as written here will not transform our code, it will just run it through babel but will not apply any preset or plugins.
+# Add babel7 dependencies
+> yarn add -D @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties
 
-# to do this we need instruct babel explicily
-module.exports = {
-  devtool: 'cheap-module-source-map',
-  module: {
-    rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' } 
-    ]
-  }
-}
+# You need polyfills for older browsers
+# to use it, make sure it runs before any other code is run by doing this
+# import this to the index.js file at the top
+# import '@babel/polyfill'
+> $ yarn add @babel/polyfill
 
-# go to the babel.config.js secion on the website to review your options on configuration
-# in this case, to keep the webpack.config.js clean, just create a babelrc file
-> $ touch .babelrc
-> Inside .babelrc
+```
 
-# applies two presets, "env" to transpile everythig down to es5, react preset to transform jsx to react createElement calls
-# applies class props transform class props syntax
-# could also install decorator plugin
-# look at babel/package github page, if you want something, install and then place in the plugins array here
-{
-  "presets": [
-    "@babel/env", "@babel/react"
-  ],
-  "plugins": [
-    "@babel/proposal-class-properties"
-  ]
-}
 
-# Now setup the new scripts inside the package.json file
 
-"scripts": {
-  "start": "webpack-dev-server",
-  "dev": "webpack --mode development --progress",
-  "build": "webpack --mode production --progress"
-}
 
-# setup the webpack html plugin
-# new it up, by requireing it , 
 
-# First import HtmlWebpackPlugin like so:
+
+# Beginning webpack.config.js edit
+
+```bash
+# Create webpack configuration file
+> touch webpack.config.js
+```
+
+Note: the rules as written here will not transform our code, it will just run it through babel but will not apply any preset or plugins.
+
+```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -72,9 +48,42 @@ module.exports = {
     })
   ]
 }
+```
 
-# move the index.html file from public into root (and rm the public folder)
-# the new html file should look like so:
+# Beginning .babelrc config edit
+
+```bash
+# Create babel configuration file
+> touch .babelrc
+```
+Applies two presets, "env" to transpile everythig down to es5, react preset to transform jsx to react createElement calls
+```json
+{
+  "presets": [
+    "@babel/env", 
+    "@babel/react"
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties"
+  ]
+}
+```
+Look at babel/package github page, if you want something, install and then place in the plugins array.
+
+
+# Beginning package.json configuration file, scripts edit
+
+```json
+"scripts": {
+  "start": "webpack-dev-server  --open --port 4000 --compress --mode development",
+  "dev": "webpack --mode development --progress",
+  "build": "webpack --mode production --progress"
+}
+```
+
+# Beginning index.html file
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,55 +101,17 @@ module.exports = {
 </body>
 
 </html>
+````
 
-# the most important thing is the root
+The most important thing is the `root`
 
-# now to to the package.json file and add in options to the webpack dev server start script.  Looking at the options, look to web dev server link and look for the options provided to you
-"start": "webpack-dev-server --open --port 4000 --compress --mode development",
 
-# take out the css, logo, svg files, your App.js should look like this to start
+# Optimizations
 
-import React, { Component } from 'react';
+In order for our bundles to not get so large, we have a few options.  Make sure to use the `useBuiltins` option in Babel.
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        Webpack baseline!!
-      </div>
-    );
-  }
-}
 
-export default App;
-
-# now run
-> $ yarn start
-
-# should run
-
-> $ yarn build
-
-# should build
-
-# now you need polyfills for older browsers
-
-> $ yarn add @babel/polyfill
-
-# to use it, make sure it runs before any other code is run by doing this
-
-# import this to the index.js file at the top
-
-import '@babel/polyfill'
-
-# in order for our bundles to not get so large, do this
-
-# for bable configuration we can make sure we use the useBuiltins option
-
-# notice the new "useBuiltIns" and "targets"
-
-# look at browserl.ist for options
-
+```json
 {
   "presets": [
     [
@@ -162,57 +133,68 @@ import '@babel/polyfill'
     "@babel/proposal-class-properties"
   ]
 }
+```
+Look at `browserl.ist` website for options.
 
-# now the bundle may be too big.  So we can do lazy loading or code splitting to remedy
+Another issue may be that the bundle is too big.  We can try lazy loading or code splitting to remedy that situation.  `Search: webpack code splitting`.
 
-# search: webpack code splitting
+To add code splitting to your index.js file.
 
-# Add code splitting ot your index.js file
-
+```javascript
 import(/* webpackChunkName: 'app' */ './App')
   .then(({ default: App }) =>
     render(<App />, document.getElementById('root'))
   )
+```
+This special dynamic import syntax above is not supported out of the box.  You'll need to also add a plugin by babel
 
-# but this special dynamic import syntax is not supported out of the box.  You'll need to also add a plugin by babel
 
-# look for babel/babel package babel-plugin-syntax-dynamic-import
-
+```bash
+# Install for dynamic import syntax code splitting or chunking
 > $ yarn add -D @babel/plugin-syntax-dynamic-import
+```
 
-# go back to your .babelrc and add this to the list of plugins
+Go back to your .babelrc and add syntax-dynamic-import to the plugins array list
 
+```json
 "plugins": [
   "@babel/proposal-class-properties",
   "@babel/syntax-dynamic-import"
 ]
-
-# remember the plugin can be removed as it's implied
-
-> $ yarn build
+```
 
 
-# for class properties (already installed earlier)
-https://babeljs.io/docs/en/babel-plugin-proposal-class-properties
-
-$ yarn add -D @babel/plugin-proposal-class-properties
+Optional support for [rest-spread](https://babeljs.io/docs/en/next/babel-plugin-proposal-object-rest-spread.html)
 
 
-# for rest-spread
-https://babeljs.io/docs/en/next/babel-plugin-proposal-object-rest-spread.html
+```bash
+> yarn add -D @babel/plugin-proposal-object-rest-spread
+```
 
-$ yarn add -D @babel/plugin-proposal-object-rest-spread
+# TypeSript support additions
 
+```bash
+# Install for typescript support
+> yarn add -D @babel/preset-typescript typescript
+```
 
-# for typescript
-yarn add -D @babel/preset-typescript typescript
+Make the following additions to the `.bablerc` file.
 
-// .babelrc
+```json
 {
-  "presets": ["@babel/react", "@babel/typescript", ["@babel/env", { "modules": false }]],
-... 
+  "presets": [
+    "@babel/react", 
+    "@babel/typescript", 
+    [
+      "@babel/env", 
+      { "modules": false }
+    ]
+  ],
+```
 
-// webpack.config.js
+And add these rules ot the `webpack.config.js` file.
+
+```javascript
 rules: [
   {
     test: /\.tsx?$/,
@@ -223,12 +205,18 @@ rules: [
     use: ["source-map-loader"],
     enforce: "pre"
   },
-...
+```
 
-# create a tsconfig.json
-$ touch. tsconfig.json
+Now create a TypeScript configuration file.
 
-// tsconfig.json
+```bash
+# Create a tsconfig.json
+> touch. tsconfig.json
+```
+
+Add the following config to the TypeScript configuraion file.
+
+```json
 {
     "compilerOptions": {
         "outDir": "./dist/",
@@ -242,7 +230,4 @@ $ touch. tsconfig.json
         "./src/**/*"
     ]
 }
-
-$ yarn add @types/react @types/react-dom ??
-
-yarn remove @babel/preset-typescript awesome-typescript-loader source-map-loader typescript @types/react @types/react-dom
+```
